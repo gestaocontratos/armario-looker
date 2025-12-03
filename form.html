@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário</title>
+</head>
+<body style="font-family:sans-serif; max-width:400px; margin:auto; padding:20px;">
+  <h2>Enviar Dados</h2>
+
+  <label>Nome:</label><br>
+  <input type="text" id="nome" style="width:100%; padding:6px;"><br><br>
+
+  <label>Informação:</label><br>
+  <input type="text" id="info" style="width:100%; padding:6px;"><br><br>
+
+  <button onclick="enviar()" style="width:100%; padding:10px;">Enviar</button>
+
+  <p id="retorno" style="margin-top:20px; color:green;"></p>
+
+  <script>
+    function enviar() {
+      const payload = {
+        nome: document.getElementById("nome").value,
+        info: document.getElementById("info").value
+      };
+
+      fetch("https://script.google.com/a/macros/smevr.com.br/s/AKfycbx1AP4mx1mlSORn6zMdrAwPQIZ75s-T9WF4F9GILz7bugunqggSf6Ymei7zAf_yO7k-/exec", {
+        method: "POST",
+        contentType: "application/json",
+        body: JSON.stringify(payload)
+      })
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById("retorno").innerText = "Enviado com sucesso!";
+      })
+      .catch(err => {
+        document.getElementById("retorno").innerText = "Erro ao enviar.";
+      });
+    }
+  </script>
+
+</body>
+</html>
